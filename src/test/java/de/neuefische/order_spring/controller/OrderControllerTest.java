@@ -65,25 +65,6 @@ public class OrderControllerTest {
     }
 
 
-    @Test
-    public void findProductsReturnsProductsContainingMatchingStringInName(){
-        // GIVEN
-        when(orderService.findProducts("A")).thenReturn(List.of(
-                new Product("1", "Banana"),
-                new Product("2", "Apple")));
-
-        List<Product> expected = List.of(
-                new Product("1", "Banana"),
-                new Product("2", "Apple"));
-
-
-        //WHEN
-        List<Product> actual = orderService.findProducts("A");
-
-        // THEN
-        assertThat(actual, is(expected));
-        verify(orderService).findProducts("A");
-    }
 
 
 }

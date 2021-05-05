@@ -5,7 +5,9 @@ import de.neuefische.order_spring.model.Product;
 import de.neuefische.order_spring.repository.OrderRepo;
 import de.neuefische.order_spring.repository.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,24 +31,19 @@ public class OrderService {
 
         List<Product> products = new ArrayList<>();
         for (String id : productList){
-            products.add(productRepo.getProduct(id).get());
+            if(productRepo.getProduct(id).isPresent()) {
+                products.add(productRepo.getProduct(id).get());
+            } else {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No product with this id, idiot");
+            }
         }
 
         return orderRepo.addOrder(products);
-    }
-
-    public List<Product> listAllProducts(){
-        return productRepo.list();
     }
 
     public List<Order> listAllOrders(){
         return orderRepo.list();
     }
 
-    public List<Product> findProducts(String search){
-
-        return productRepo.findKeyByValue(search.toLowerCase());
-
-    }
 
 }
