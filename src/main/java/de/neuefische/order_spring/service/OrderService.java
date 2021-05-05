@@ -13,8 +13,8 @@ import java.util.List;
 public class OrderService {
 
 
-    private ProductRepo productRepo;
-    private OrderRepo orderRepo;
+    private final ProductRepo productRepo;
+    private final OrderRepo orderRepo;
 
     @Autowired
     public OrderService(ProductRepo productRepo, OrderRepo orderRepo){

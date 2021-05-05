@@ -10,15 +10,18 @@ import java.util.*;
 @Repository
 public class OrderRepo {
 
-    private Map<String, Order> orderMap;
-    private ProductRepo productRepo;
+    private final Map<String, Order> orderMap;
+    private final ProductRepo productRepo = new ProductRepo();
     private int id = 1;
 
     public OrderRepo(){
         this.orderMap = new HashMap<>();
+
     }
 
     public Order addOrder(List<String> productList){
+
+        //in service schieben
         List<Product> products = new ArrayList<>();
         for (String id : productList){
             products.add(productRepo.getProduct(id).get());
