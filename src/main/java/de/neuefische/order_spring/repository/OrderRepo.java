@@ -22,6 +22,8 @@ public class OrderRepo {
 
         Order newOrder = new Order(String.valueOf(id), productList);
 
+        orderMap.put(String.valueOf(id), newOrder);
+
         return newOrder;
     }
 
