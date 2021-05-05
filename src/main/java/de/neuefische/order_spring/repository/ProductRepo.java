@@ -8,7 +8,15 @@ import java.util.*;
 @Repository
 public class ProductRepo {
 
-    private final Map<String, Product> products = new HashMap();
+    private final Map<String, Product> products;
+
+
+    public ProductRepo(){
+        this.products = new HashMap<>();
+        products.put("1", new Product("1", "Banana"));
+        products.put("2", new Product("2", "Apple"));
+        products.put("3", new Product("3", "Kiwi"));
+    }
 
     public Product addProduct(Product product){
         products.put(product.getId(), product);
@@ -16,7 +24,7 @@ public class ProductRepo {
     }
 
     public Optional<Product> getProduct(String id){
-        if (products.get(id).equals(id)){
+        if (products.containsKey(id)){
             return Optional.of(products.get(id));
         }
         return Optional.empty();

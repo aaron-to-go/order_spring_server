@@ -4,6 +4,7 @@ import de.neuefische.order_spring.model.Order;
 import de.neuefische.order_spring.model.Product;
 import de.neuefische.order_spring.repository.OrderRepo;
 import de.neuefische.order_spring.repository.ProductRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +16,14 @@ public class OrderService {
     private ProductRepo productRepo;
     private OrderRepo orderRepo;
 
+    @Autowired
+    public OrderService(ProductRepo productRepo, OrderRepo orderRepo){
+        this.productRepo = productRepo;
+        this.orderRepo = orderRepo;
+    }
 
-    public Order addOrder(List<Product> productList){
+
+    public Order addOrder(List<String> productList){
         return orderRepo.addOrder(productList);
     }
 

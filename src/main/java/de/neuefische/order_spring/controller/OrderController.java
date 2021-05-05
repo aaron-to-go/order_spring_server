@@ -6,6 +6,7 @@ import de.neuefische.order_spring.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,10 +17,16 @@ public class OrderController {
     private final OrderService orderService;
 
     @Autowired
-    public OrderController(OrderService orderService) {this.orderService = orderService;}
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+//        List<String> idList = new ArrayList<>(List.of(
+//                "1", "2", "3"
+//        ));
+//        orderService.addOrder(idList);
+    }
 
     @PostMapping
-    public Order addOrder(List<Product> productList){
+    public Order addOrder(List<String> productList){
         return orderService.addOrder(productList);
     }
 
