@@ -11,7 +11,6 @@ import java.util.*;
 public class OrderRepo {
 
     private final Map<String, Order> orderMap;
-    private final ProductRepo productRepo = new ProductRepo();
     private int id = 1;
 
     public OrderRepo(){
