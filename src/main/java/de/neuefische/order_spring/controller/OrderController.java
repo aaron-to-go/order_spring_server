@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -19,10 +20,6 @@ public class OrderController {
     @Autowired
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
-//        List<String> idList = new ArrayList<>(List.of(
-//                "1", "2", "3"
-//        ));
-//        orderService.addOrder(idList);
     }
 
     @PostMapping
@@ -30,18 +27,18 @@ public class OrderController {
         return orderService.addOrder(productList);
     }
 
-    @GetMapping("orders")
+    @GetMapping
     public List<Order> listAllOrders(){
         return orderService.listAllOrders();
     }
 
     @GetMapping("products")
-    public List<Product> listAllProducts(){
+    public List<Product> findProducts(@RequestParam Optional<String> search){
+        if (search.isPresent() && !search.get().isBlank()) {
+            return orderService.findProducts(search.get());
+        }
         return orderService.listAllProducts();
     }
-
-    //@GetMapping
-
 
 
 }
