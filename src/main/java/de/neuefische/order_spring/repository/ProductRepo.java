@@ -1,6 +1,7 @@
 package de.neuefische.order_spring.repository;
 
 import de.neuefische.order_spring.model.Product;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -8,11 +9,11 @@ import java.util.*;
 @Repository
 public class ProductRepo {
 
-    private final Map<String, Product> products;
+    private final Map<String, Product> products = new HashMap<>();;
 
 
+    @Autowired
     public ProductRepo(){
-        this.products = new HashMap<>();
         products.put("1", new Product("1", "Banana"));
         products.put("2", new Product("2", "Apple"));
         products.put("3", new Product("3", "Kiwi"));
