@@ -7,7 +7,9 @@ import de.neuefische.order_spring.repository.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class OrderService {
@@ -24,7 +26,13 @@ public class OrderService {
 
 
     public Order addOrder(List<String> productList){
-        return orderRepo.addOrder(productList);
+
+        List<Product> products = new ArrayList<>();
+        for (String id : productList){
+            products.add(productRepo.getProduct(id).get());
+        }
+
+        return orderRepo.addOrder(products);
     }
 
     public List<Product> listAllProducts(){
@@ -33,6 +41,12 @@ public class OrderService {
 
     public List<Order> listAllOrders(){
         return orderRepo.list();
+    }
+
+    public List<Product> findProducts(String search){
+
+        return productRepo.findKeyByValue(search.toLowerCase());
+
     }
 
 }

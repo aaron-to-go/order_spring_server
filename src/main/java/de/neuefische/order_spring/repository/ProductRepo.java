@@ -35,5 +35,17 @@ public class ProductRepo {
         return List.copyOf(products.values());
     }
 
-
+    public  List<Product> findKeyByValue(String search){
+        List<Product> productList = new ArrayList<>();
+        for(Map.Entry<String, Product> entry: products.entrySet()){
+            if(entry.getValue().getName().toLowerCase().contains(search)) {
+                productList.add(entry.getValue());
+            }
+        }
+        return productList;
+    }
 }
+
+
+
+

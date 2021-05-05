@@ -11,7 +11,6 @@ import java.util.*;
 public class OrderRepo {
 
     private final Map<String, Order> orderMap;
-    private final ProductRepo productRepo = new ProductRepo();
     private int id = 1;
 
     public OrderRepo(){
@@ -19,16 +18,10 @@ public class OrderRepo {
 
     }
 
-    public Order addOrder(List<String> productList){
+    public Order addOrder(List<Product> productList){
 
-        //in service schieben
-        List<Product> products = new ArrayList<>();
-        for (String id : productList){
-            products.add(productRepo.getProduct(id).get());
-        }
+        Order newOrder = new Order(String.valueOf(id), productList);
 
-        Order newOrder = new Order(String.valueOf(id), products);
-        id++;
         return newOrder;
     }
 
