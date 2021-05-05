@@ -22,7 +22,7 @@ public class OrderServiceTest {
 
     @Mock
     OrderRepo orderRepo = mock(OrderRepo.class);
-    ProductRepo productRepo = mock(ProductRepo.class);
+
 
     @Test
     public void addMethodShouldAddAnotherOrderToRepo(){
@@ -72,23 +72,5 @@ public class OrderServiceTest {
         verify(orderRepo).list();
     }
 
-    @Test
-    public void findProductsReturnsProductsContainingMatchingStringInName(){
-        // GIVEN
-        when(productRepo.findKeyByValue("A")).thenReturn(List.of(
-                new Product("1", "Banana"),
-                new Product("2", "Apple")));
 
-        List<Product> expected = List.of(
-                new Product("1", "Banana"),
-                new Product("2", "Apple"));
-
-
-        //WHEN
-        List<Product> actual = productRepo.findKeyByValue("A");
-
-        // THEN
-        assertThat(actual, is(expected));
-        verify(productRepo).findKeyByValue("A");
-    }
 }

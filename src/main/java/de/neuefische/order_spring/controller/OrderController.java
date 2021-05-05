@@ -32,13 +32,6 @@ public class OrderController {
         return orderService.listAllOrders();
     }
 
-    @GetMapping("products")
-    public List<Product> findProducts(@RequestParam Optional<String> search){
-        if (search.isPresent() && !search.get().isBlank()) {
-            return orderService.findProducts(search.get());
-        }
-        return orderService.listAllProducts();
-    }
 
 
 }
